@@ -11,6 +11,7 @@ public class LockerTest {
         Locker locker = new Locker(16);
         Ticket ticket = locker.lock(new Bag("my bag"));
         assertThat(ticket).isNotNull();
+        assertThat(locker.getSize()).isEqualTo(17);
     }
 
     @Test
