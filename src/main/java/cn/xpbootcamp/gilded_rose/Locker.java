@@ -11,6 +11,10 @@ public class Locker {
         ticketBagMap.put(ticket, bag);
     }
 
+    public Integer getSize() {
+        return size;
+    }
+
     public Locker(int i) {
         this.size = i;
     }
@@ -34,7 +38,12 @@ public class Locker {
         if (ticket == null) {
             throw new Exception("请出示您的票据");
         }
+        if (!ticketBagMap.containsKey(ticket)) {
+            throw new Exception("票据不合法");
+        }
         size -= 1;
-        return ticketBagMap.get(ticket);
+        Bag bag = ticketBagMap.get(ticket);
+        ticketBagMap.remove(ticket);
+        return bag;
     }
 }
