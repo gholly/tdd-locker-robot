@@ -37,6 +37,25 @@ public class LockerTest {
         assertThat(unlockedBag).isNotNull();
         assertThat(unlockedBag.getId()).isEqualTo("bag-id");
 
-
     }
+
+    @Test
+    public void should_return_exception_when_unlock_bag_given_ticket_is_null() {
+        //given
+        Locker locker = new Locker(19);
+        Bag bag = new Bag("bag-id");
+        Ticket ticket = new Ticket("ticket-id");
+
+        locker.setTicketBagMap(ticket, bag);
+        //when
+        try {
+            locker.unlock(null);
+        } catch (Exception e) {
+            assertThat(e.getMessage()).isEqualTo("请出示您的票据");
+        }
+    }
+
+
+
+
 }

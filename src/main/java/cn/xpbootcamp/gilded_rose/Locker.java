@@ -31,10 +31,10 @@ public class Locker {
     }
 
     public Bag unlock(Ticket ticket) throws Exception {
-        size -= 1;
         if (ticket == null) {
-
+            throw new Exception("请出示您的票据");
         }
+        size -= 1;
         return ticketBagMap.get(ticket);
     }
 }
