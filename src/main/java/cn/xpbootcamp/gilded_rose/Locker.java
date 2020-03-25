@@ -15,8 +15,8 @@ public class Locker {
         return size;
     }
 
-    public Locker(int i) {
-        this.size = i;
+    public Locker(int size) {
+        this.size = size;
     }
 
     public Ticket lock(Bag bag) throws Exception {
@@ -27,11 +27,6 @@ public class Locker {
         Ticket ticket = new Ticket(generateTicket());
         ticketBagMap.put(ticket, bag);
         return ticket;
-    }
-
-
-    private String generateTicket() {
-        return String.valueOf(System.currentTimeMillis());
     }
 
     public Bag unlock(Ticket ticket) throws Exception {
@@ -45,5 +40,9 @@ public class Locker {
         Bag bag = ticketBagMap.get(ticket);
         ticketBagMap.remove(ticket);
         return bag;
+    }
+
+    private String generateTicket() {
+        return String.valueOf(System.currentTimeMillis());
     }
 }
