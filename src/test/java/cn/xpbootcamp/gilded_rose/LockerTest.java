@@ -16,7 +16,7 @@ public class LockerTest {
 
     @Test
     public void should_return_exception_when_lock_bag_given_locker_is_full() {
-        Locker locker = new Locker(19);
+        Locker locker = new Locker(0);
         try {
             locker.lock(new Bag("my bag"));
         } catch (Exception e) {

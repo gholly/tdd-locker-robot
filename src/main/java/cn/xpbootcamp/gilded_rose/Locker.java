@@ -20,7 +20,7 @@ public class Locker {
     }
 
     public Ticket lock(Bag bag) throws Exception {
-        if (size == 19) {
+        if (size == 0) {
             throw new Exception("柜子已满");
         }
         size += 1;
