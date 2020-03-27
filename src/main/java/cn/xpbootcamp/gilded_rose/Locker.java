@@ -23,7 +23,7 @@ public class Locker {
         if (size == 0) {
             throw new Exception("柜子已满");
         }
-        size += 1;
+        size -= 1;
         Ticket ticket = new Ticket(generateTicket());
         ticketBagMap.put(ticket, bag);
         return ticket;
@@ -36,7 +36,7 @@ public class Locker {
         if (!ticketBagMap.containsKey(ticket)) {
             throw new Exception("票据不合法");
         }
-        size -= 1;
+        size += 1;
         Bag bag = ticketBagMap.get(ticket);
         ticketBagMap.remove(ticket);
         return bag;

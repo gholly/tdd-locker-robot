@@ -11,7 +11,7 @@ public class LockerTest {
         Locker locker = new Locker(16);
         Ticket ticket = locker.lock(new Bag("my bag"));
         assertThat(ticket).isNotNull();
-        assertThat(locker.getSize()).isEqualTo(17);
+        assertThat(locker.getSize()).isEqualTo(15);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class LockerTest {
         //should
         assertThat(unlockedBag).isNotNull();
         assertThat(unlockedBag.getId()).isEqualTo("bag-id");
-        assertThat(locker.getSize()).isEqualTo(18);
+        assertThat(locker.getSize()).isEqualTo(20);
 
 
     }
