@@ -1,15 +1,18 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.TicketErrorException;
 import org.junit.jupiter.api.Test;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LockerTest {
-
+    //存包
     @Test
-    public void should_return_ticket_when_lock_bag_given_locker_is_not_full() throws Exception {
+    public void should_return_ticket_when_lock_bag_given_locker_is_not_full() {
         Locker locker = new Locker(16);
-        Ticket ticket = locker.lock(new Bag("my bag"));
+        Ticket ticket = locker.storeBag(new Bag("my bag"));
         assertThat(ticket).isNotNull();
         assertThat(locker.getSize()).isEqualTo(15);
     }
@@ -17,11 +20,9 @@ public class LockerTest {
     @Test
     public void should_return_exception_when_lock_bag_given_locker_is_full() {
         Locker locker = new Locker(0);
-        try {
-            locker.lock(new Bag("my bag"));
-        } catch (Exception e) {
-            assertThat(e.getMessage()).isEqualTo("柜子已满");
-        }
+        assertThrows(
+                TicketErrorException.class,
+                () -> locker.storeBag(new Bag("my bag")));
     }
 
     @Test
@@ -29,11 +30,10 @@ public class LockerTest {
         //given
         Locker locker = new Locker(19);
         Bag bag = new Bag("bag-id");
-        Ticket ticket = new Ticket("ticket-id");
 
-        locker.setTicketBagMap(ticket, bag);
+        Ticket ticket = locker.storeBag(bag);
         //when
-        Bag unlockedBag = locker.unlock(ticket);
+        Bag unlockedBag = locker.takeBag(ticket);
         //should
         assertThat(unlockedBag).isNotNull();
         assertThat(unlockedBag.getId()).isEqualTo("bag-id");
@@ -42,21 +42,6 @@ public class LockerTest {
 
     }
 
-    @Test
-    public void should_return_exception_when_unlock_bag_given_ticket_is_null() {
-        //given
-        Locker locker = new Locker(19);
-        Bag bag = new Bag("bag-id");
-        Ticket ticket = new Ticket("ticket-id");
-
-        locker.setTicketBagMap(ticket, bag);
-        //when
-        try {
-            locker.unlock(null);
-        } catch (Exception e) {
-            assertThat(e.getMessage()).isEqualTo("请出示您的票据");
-        }
-    }
 
     @Test
     public void should_return_exception_when_unlock_bag_given_ticket_is_wrong() {
@@ -64,14 +49,12 @@ public class LockerTest {
         Locker locker = new Locker(19);
         Bag bag = new Bag("bag-id");
         Ticket ticket = new Ticket("ticket-id");
+        locker.storeBag(bag);
 
-        locker.setTicketBagMap(ticket, bag);
-        //when
-        try {
-            locker.unlock(new Ticket("错误的票据"));
-        } catch (Exception e) {
-            assertThat(e.getMessage()).isEqualTo("票据不合法");
-        }
+        assertThrows(
+                TicketErrorException.class,
+                () -> locker.takeBag(ticket));
+
     }
 
 
