@@ -7,23 +7,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Locker {
-    private Integer size;
+    private Integer totalCapacity;
+    private Integer emptyCapacity;
     private Map<Ticket, Bag> ticketBagMap = new HashMap<>();
 
 
-    public Integer getSize() {
-        return size;
+    public Integer getEmptyCapacity() {
+        return emptyCapacity;
     }
 
-    public Locker(int size) {
-        this.size = size;
+    public Integer getTotalCapacity() {
+        return totalCapacity;
+    }
+
+    public Locker(Integer totalCapacity, Integer emptyCapacity) {
+        this.totalCapacity = totalCapacity;
+        this.emptyCapacity = emptyCapacity;
     }
 
     public Ticket storeBag(Bag bag) {
-        if (size == 0) {
+        if (emptyCapacity == 0) {
             throw new LockerFullException();
         }
-        size -= 1;
+        emptyCapacity -= 1;
         Ticket ticket = new Ticket(generateTicket());
         ticketBagMap.put(ticket, bag);
         return ticket;
@@ -33,7 +39,7 @@ public class Locker {
         if (!ticketBagMap.containsKey(ticket)) {
             throw new TicketErrorException();
         }
-        size += 1;
+        emptyCapacity += 1;
         Bag bag = ticketBagMap.get(ticket);
         ticketBagMap.remove(ticket);
         return bag;
