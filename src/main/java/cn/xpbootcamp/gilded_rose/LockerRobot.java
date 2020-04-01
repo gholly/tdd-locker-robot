@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
 import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
+import cn.xpbootcamp.gilded_rose.exception.TicketErrorException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,9 @@ public class LockerRobot {
     }
 
     public Bag takeBag(Ticket ticket) {
+        if (!ticketLockerMap.containsKey(ticket)) {
+            throw new TicketErrorException();
+        }
         Bag bag = ticketLockerMap.get(ticket).takeBag(ticket);
         ticketLockerMap.remove(ticket);
         return bag;

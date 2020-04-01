@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
 import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
+import cn.xpbootcamp.gilded_rose.exception.TicketErrorException;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 
@@ -46,5 +47,16 @@ public class LockerRobotTest {
         assertThat(unlockedBag).isNotNull();
         assertThat(unlockedBag.getId()).isEqualTo("bag-id");
      }
+
+    @Test
+    public void should_throw_ticket_error_exception_when_take_bag_given_ticket_is_wrong() {
+        //given
+        Locker locker = new Locker(20, 19);
+        Locker locker01 = new Locker(20, 0);
+        LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
+        Ticket ticket = new Ticket("ticket-id");
+        //then
+        assertThrows(TicketErrorException.class, () -> lockerRobot.takeBag(ticket));
+    }
 
 }
