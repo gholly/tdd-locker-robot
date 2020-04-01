@@ -25,6 +25,10 @@ public class Locker {
         this.emptyCapacity = emptyCapacity;
     }
 
+    public boolean isFull() {
+        return emptyCapacity == 0;
+    }
+
     public Ticket storeBag(Bag bag) {
         if (emptyCapacity == 0) {
             throw new LockerFullException();
