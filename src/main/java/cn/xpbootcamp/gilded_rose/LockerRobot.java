@@ -25,4 +25,9 @@ public class LockerRobot {
         return ticket;
     }
 
+    public Bag takeBag(Ticket ticket) {
+        Bag bag = ticketLockerMap.get(ticket).takeBag(ticket);
+        ticketLockerMap.remove(ticket);
+        return bag;
+    }
 }
