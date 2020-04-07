@@ -34,7 +34,7 @@ public class Locker {
             throw new LockerFullException();
         }
         emptyCapacity -= 1;
-        Ticket ticket = new Ticket(generateTicket());
+        Ticket ticket = new Ticket();
         ticketBagMap.put(ticket, bag);
         return ticket;
     }

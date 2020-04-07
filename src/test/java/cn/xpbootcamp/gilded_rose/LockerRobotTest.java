@@ -17,7 +17,7 @@ public class LockerRobotTest {
         Locker locker01 = new Locker(20, 16);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
         //when
-        Ticket ticket = lockerRobot.storeBag(new Bag("my bag"));
+        Ticket ticket = lockerRobot.storeBag(new Bag());
         //then
         assertThat(ticket).isNotNull();
     }
@@ -29,13 +29,13 @@ public class LockerRobotTest {
         Locker locker01 = new Locker(20, 0);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
         //when then
-        assertThrows(LockerFullException.class, () -> lockerRobot.storeBag(new Bag("my bag")));
+        assertThrows(LockerFullException.class, () -> lockerRobot.storeBag(new Bag()));
     }
 
     @Test
     public void should_return_bag_when_take_bag_given_locker_robot_is_not_empty_and_right_ticket() throws Exception {
         //given
-        Bag bag = new Bag("bag-id");
+        Bag bag = new Bag();
         Locker locker = new Locker(20, 19);
         Locker locker01 = new Locker(20, 0);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
@@ -45,7 +45,6 @@ public class LockerRobotTest {
         Bag unlockedBag = lockerRobot.takeBag(ticket);
         //then
         assertThat(unlockedBag).isNotNull();
-        assertThat(unlockedBag.getId()).isEqualTo("bag-id");
      }
 
     @Test
@@ -54,7 +53,7 @@ public class LockerRobotTest {
         Locker locker = new Locker(20, 19);
         Locker locker01 = new Locker(20, 0);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
-        Ticket ticket = new Ticket("ticket-id");
+        Ticket ticket = new Ticket();
         //then
         assertThrows(TicketErrorException.class, () -> lockerRobot.takeBag(ticket));
     }
