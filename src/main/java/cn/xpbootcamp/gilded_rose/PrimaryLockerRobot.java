@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PrimaryLockerRobot {
+public class PrimaryLockerRobot implements Robot{
     private List<Locker> lockers;
     private Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 

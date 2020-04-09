@@ -6,7 +6,7 @@ import cn.xpbootcamp.gilded_rose.exception.TicketErrorException;
 import java.util.Comparator;
 import java.util.List;
 
-public class SmartLockerRobot {
+public class SmartLockerRobot implements Robot {
 
     private List<Locker> lockers;
 
