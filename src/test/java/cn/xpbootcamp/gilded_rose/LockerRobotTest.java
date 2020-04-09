@@ -13,8 +13,8 @@ public class LockerRobotTest {
     @Test
     public void should_return_ticket_when_store_bag_given_locker_robot_is_not_full() {
         //given
-        Locker locker = new Locker(20, 16);
-        Locker locker01 = new Locker(20, 16);
+        Locker locker = new Locker(20);
+        Locker locker01 = new Locker(20);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
         //when
         Ticket ticket = lockerRobot.storeBag(new Bag());
@@ -25,10 +25,13 @@ public class LockerRobotTest {
     @Test
     public void should_throw_locker_full_exception_when_store_bag_given_locker_robot_is_full() {
         //given
-        Locker locker = new Locker(20, 0);
-        Locker locker01 = new Locker(20, 0);
+        Locker locker = new Locker(1);
+        Locker locker01 = new Locker(1);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
-        //when then
+        //when
+        locker.storeBag(new Bag());
+        locker01.storeBag(new Bag());
+        // then
         assertThrows(LockerFullException.class, () -> lockerRobot.storeBag(new Bag()));
     }
 
@@ -36,8 +39,8 @@ public class LockerRobotTest {
     public void should_return_bag_when_take_bag_given_locker_robot_is_not_empty_and_right_ticket() throws Exception {
         //given
         Bag bag = new Bag();
-        Locker locker = new Locker(20, 19);
-        Locker locker01 = new Locker(20, 0);
+        Locker locker = new Locker(20);
+        Locker locker01 = new Locker(20);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
 
         Ticket ticket = lockerRobot.storeBag(bag);
@@ -45,13 +48,13 @@ public class LockerRobotTest {
         Bag unlockedBag = lockerRobot.takeBag(ticket);
         //then
         assertThat(unlockedBag).isNotNull();
-     }
+    }
 
     @Test
     public void should_throw_ticket_error_exception_when_take_bag_given_ticket_is_wrong() {
         //given
-        Locker locker = new Locker(20, 19);
-        Locker locker01 = new Locker(20, 0);
+        Locker locker = new Locker(20);
+        Locker locker01 = new Locker(20);
         LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
         Ticket ticket = new Ticket();
         //then

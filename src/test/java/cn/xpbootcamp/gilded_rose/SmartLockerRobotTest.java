@@ -13,8 +13,8 @@ public class SmartLockerRobotTest {
     @Test
     public void should_return_ticket_when_store_bag_given_smart_locker_robot_is_not_full_and_have_empty_capacity_is_3_and_empty_capacity_is_1() {
         //given
-        Locker locker = new Locker(10, 16);
-        Locker locker01 = new Locker(15, 13);
+        Locker locker = new Locker(10);
+        Locker locker01 = new Locker(15);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker, locker01));
         //when
         Bag bag = new Bag();
@@ -27,8 +27,8 @@ public class SmartLockerRobotTest {
     @Test
     public void should_throw_locker_full_exception_when_store_bag_given_smart_locker_robot_is_full() {
         //given
-        Locker locker = new Locker(20, 0);
-        Locker locker01 = new Locker(20, 0);
+        Locker locker = new Locker(20);
+        Locker locker01 = new Locker(20);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker, locker01));
         //when then
         assertThrows(LockerFullException.class, () -> smartLockerRobot.storeBag(new Bag()));
@@ -39,8 +39,8 @@ public class SmartLockerRobotTest {
     public void should_return_bag_when_take_bag_given_smart_locker_robot_is_not_empty_and_right_ticket() throws Exception {
         //given
         Bag bag = new Bag();
-        Locker locker = new Locker(20, 19);
-        Locker locker01 = new Locker(20, 0);
+        Locker locker = new Locker(20);
+        Locker locker01 = new Locker(20);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker, locker01));
 
         Ticket ticket = smartLockerRobot.storeBag(bag);
@@ -53,8 +53,8 @@ public class SmartLockerRobotTest {
     @Test
     public void should_throw_ticket_error_exception_when_take_bag_given_ticket_is_wrong() {
         //given
-        Locker locker = new Locker(20, 19);
-        Locker locker01 = new Locker(20, 0);
+        Locker locker = new Locker(20);
+        Locker locker01 = new Locker(20);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker, locker01));
         Ticket ticket = new Ticket();
         //then
