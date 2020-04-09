@@ -13,13 +13,15 @@ public class SmartLockerRobotTest {
     @Test
     public void should_return_ticket_when_store_bag_given_smart_locker_robot_is_not_full_and_have_empty_capacity_is_3_and_empty_capacity_is_1() {
         //given
-        Locker locker = new Locker(20, 16);
-        Locker locker01 = new Locker(20, 16);
+        Locker locker = new Locker(10, 16);
+        Locker locker01 = new Locker(15, 13);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker, locker01));
         //when
+        Bag bag = new Bag();
         Ticket ticket = smartLockerRobot.storeBag(new Bag());
         //then
         assertThat(ticket).isNotNull();
+        assertThat(locker01.takeBag(ticket)).isNotNull();
     }
 
     @Test

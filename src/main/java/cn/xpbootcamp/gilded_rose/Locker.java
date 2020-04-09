@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class Locker {
     private Integer totalCapacity;
-    private Integer emptyCapacity;
     private Map<Ticket, Bag> ticketBagMap = new HashMap<>();
 
 
@@ -20,20 +19,18 @@ public class Locker {
         return totalCapacity;
     }
 
-    public Locker(Integer totalCapacity, Integer emptyCapacity) {
+    public Locker(Integer totalCapacity) {
         this.totalCapacity = totalCapacity;
-        this.emptyCapacity = emptyCapacity;
     }
 
     public boolean isFull() {
-        return emptyCapacity == 0;
+        return getEmptyCapacity() == 0;
     }
 
     public Ticket storeBag(Bag bag) {
-        if (emptyCapacity == 0) {
+        if (getEmptyCapacity() == 0) {
             throw new LockerFullException();
         }
-        emptyCapacity -= 1;
         Ticket ticket = new Ticket();
         ticketBagMap.put(ticket, bag);
         return ticket;
@@ -43,7 +40,6 @@ public class Locker {
         if (!ticketBagMap.containsKey(ticket)) {
             throw new TicketErrorException();
         }
-        emptyCapacity += 1;
         Bag bag = ticketBagMap.get(ticket);
         ticketBagMap.remove(ticket);
         return bag;
