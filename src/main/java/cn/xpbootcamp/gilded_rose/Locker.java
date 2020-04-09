@@ -13,7 +13,7 @@ public class Locker {
 
 
     public Integer getEmptyCapacity() {
-        return emptyCapacity;
+        return totalCapacity - ticketBagMap.size();
     }
 
     public Integer getTotalCapacity() {
@@ -49,7 +49,4 @@ public class Locker {
         return bag;
     }
 
-    private String generateTicket() {
-        return String.valueOf(System.currentTimeMillis());
-    }
 }
