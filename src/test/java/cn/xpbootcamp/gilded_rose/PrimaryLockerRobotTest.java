@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class LockerRobotTest {
+public class PrimaryLockerRobotTest {
 
     @Test
     public void should_return_ticket_when_store_bag_given_locker_robot_is_not_full() {
         //given
         Locker locker = new Locker(20);
         Locker locker01 = new Locker(20);
-        LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
+        PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
         //when
         Ticket ticket = lockerRobot.storeBag(new Bag());
         //then
@@ -27,7 +27,7 @@ public class LockerRobotTest {
         //given
         Locker locker = new Locker(1);
         Locker locker01 = new Locker(1);
-        LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
+        PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
         //when
         locker.storeBag(new Bag());
         locker01.storeBag(new Bag());
@@ -41,7 +41,7 @@ public class LockerRobotTest {
         Bag bag = new Bag();
         Locker locker = new Locker(20);
         Locker locker01 = new Locker(20);
-        LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
+        PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
 
         Ticket ticket = lockerRobot.storeBag(bag);
         //when
@@ -55,7 +55,7 @@ public class LockerRobotTest {
         //given
         Locker locker = new Locker(20);
         Locker locker01 = new Locker(20);
-        LockerRobot lockerRobot = new LockerRobot(Lists.newArrayList(locker, locker01));
+        PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
         Ticket ticket = new Ticket();
         //then
         assertThrows(TicketErrorException.class, () -> lockerRobot.takeBag(ticket));

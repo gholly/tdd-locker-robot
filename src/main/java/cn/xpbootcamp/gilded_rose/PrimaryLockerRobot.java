@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LockerRobot {
+public class PrimaryLockerRobot {
     private List<Locker> lockers;
     private Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
 
-    public LockerRobot(List<Locker> lockers) {
+    public PrimaryLockerRobot(List<Locker> lockers) {
         this.lockers = lockers;
     }
 
