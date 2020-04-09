@@ -17,7 +17,7 @@ public class PrimaryLockerRobotTest {
         Locker locker01 = new Locker(20);
         PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
         //when
-        Ticket ticket = lockerRobot.storeBag(new Bag());
+        Ticket ticket = lockerRobot.store(new Bag());
         //then
         assertThat(ticket).isNotNull();
     }
@@ -29,10 +29,10 @@ public class PrimaryLockerRobotTest {
         Locker locker01 = new Locker(1);
         PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
         //when
-        locker.storeBag(new Bag());
-        locker01.storeBag(new Bag());
+        locker.store(new Bag());
+        locker01.store(new Bag());
         // then
-        assertThrows(LockerFullException.class, () -> lockerRobot.storeBag(new Bag()));
+        assertThrows(LockerFullException.class, () -> lockerRobot.store(new Bag()));
     }
 
     @Test
@@ -43,9 +43,9 @@ public class PrimaryLockerRobotTest {
         Locker locker01 = new Locker(20);
         PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
 
-        Ticket ticket = lockerRobot.storeBag(bag);
+        Ticket ticket = lockerRobot.store(bag);
         //when
-        Bag unlockedBag = lockerRobot.takeBag(ticket);
+        Bag unlockedBag = lockerRobot.take(ticket);
         //then
         assertThat(unlockedBag).isNotNull();
     }
@@ -58,7 +58,7 @@ public class PrimaryLockerRobotTest {
         PrimaryLockerRobot lockerRobot = new PrimaryLockerRobot(Lists.newArrayList(locker, locker01));
         Ticket ticket = new Ticket();
         //then
-        assertThrows(TicketErrorException.class, () -> lockerRobot.takeBag(ticket));
+        assertThrows(TicketErrorException.class, () -> lockerRobot.take(ticket));
     }
 
 }

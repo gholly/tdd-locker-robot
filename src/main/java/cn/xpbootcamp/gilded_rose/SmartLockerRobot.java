@@ -15,19 +15,20 @@ public class SmartLockerRobot implements Robot {
         this.lockers = lockers;
     }
 
-    public Ticket storeBag(Bag bag) {
+    public Ticket store(Bag bag) {
         Locker needStoreLocker = lockers.stream()
-                .sorted(Comparator.comparing(Locker::getEmptyCapacity).reversed())
                 .filter(locker -> !locker.isFull())
+                .sorted(Comparator.comparing(Locker::getEmptyCapacity).reversed())
                 .findFirst()
                 .orElseThrow(LockerFullException::new);
-        Ticket ticket = needStoreLocker.storeBag(bag);
+        Ticket ticket = needStoreLocker.store(bag);
         return ticket;
     }
 
-    public Bag takeBag(Ticket ticket) {
+    public Bag take(Ticket ticket) {
         return lockers.stream()
-                .map(locker -> locker.takeBag(ticket))
+                .filter(locker -> locker.isValidTicket(ticket))
+                .map(locker -> locker.take(ticket))
                 .findFirst()
                 .orElseThrow(TicketErrorException::new);
 

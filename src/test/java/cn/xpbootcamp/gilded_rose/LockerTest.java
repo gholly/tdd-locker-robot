@@ -14,7 +14,7 @@ public class LockerTest {
         //given
         Locker locker = new Locker(20);
         //when
-        Ticket ticket = locker.storeBag(new Bag());
+        Ticket ticket = locker.store(new Bag());
         //then
         assertThat(ticket).isNotNull();
         assertThat(locker.getEmptyCapacity()).isEqualTo(19);
@@ -24,9 +24,9 @@ public class LockerTest {
     public void should_throw_locker_full_exception_when_store_bag_given_locker_is_full() {
         //given
         Locker locker = new Locker(1);
-        locker.storeBag(new Bag());
+        locker.store(new Bag());
         //when then
-        assertThrows(LockerFullException.class, () -> locker.storeBag(new Bag()));
+        assertThrows(LockerFullException.class, () -> locker.store(new Bag()));
     }
 
     @Test
@@ -35,9 +35,9 @@ public class LockerTest {
         Locker locker = new Locker(20);
         Bag bag = new Bag();
 
-        Ticket ticket = locker.storeBag(bag);
+        Ticket ticket = locker.store(bag);
         //when
-        Bag unlockedBag = locker.takeBag(ticket);
+        Bag unlockedBag = locker.take(ticket);
         //then
         assertThat(unlockedBag).isNotNull();
         assertThat(locker.getEmptyCapacity()).isEqualTo(20);
@@ -51,9 +51,9 @@ public class LockerTest {
         Bag bag = new Bag();
         Ticket ticket = new Ticket();
         //when
-        locker.storeBag(bag);
+        locker.store(bag);
         //then
-        assertThrows(TicketErrorException.class, () -> locker.takeBag(ticket));
+        assertThrows(TicketErrorException.class, () -> locker.take(ticket));
     }
 
 }

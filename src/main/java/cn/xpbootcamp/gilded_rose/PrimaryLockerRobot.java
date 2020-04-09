@@ -16,21 +16,21 @@ public class PrimaryLockerRobot implements Robot{
         this.lockers = lockers;
     }
 
-    public Ticket storeBag(Bag bag) {
+    public Ticket store(Bag bag) {
         Locker needStoreLocker = lockers.stream()
                 .filter(locker -> !locker.isFull())
                 .findFirst()
                 .orElseThrow(LockerFullException::new);
-        Ticket ticket = needStoreLocker.storeBag(bag);
+        Ticket ticket = needStoreLocker.store(bag);
         ticketLockerMap.put(ticket, needStoreLocker);
         return ticket;
     }
 
-    public Bag takeBag(Ticket ticket) {
+    public Bag take(Ticket ticket) {
         if (!ticketLockerMap.containsKey(ticket)) {
             throw new TicketErrorException();
         }
-        Bag bag = ticketLockerMap.get(ticket).takeBag(ticket);
+        Bag bag = ticketLockerMap.get(ticket).take(ticket);
         ticketLockerMap.remove(ticket);
         return bag;
     }

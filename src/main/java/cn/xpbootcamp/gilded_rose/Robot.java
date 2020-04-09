@@ -3,7 +3,7 @@ package cn.xpbootcamp.gilded_rose;
 
 public interface Robot {
 
-    Ticket storeBag(Bag bag);
+    Ticket store(Bag bag);
 
-    Bag takeBag(Ticket ticket);
+    Bag take(Ticket ticket);
 }
