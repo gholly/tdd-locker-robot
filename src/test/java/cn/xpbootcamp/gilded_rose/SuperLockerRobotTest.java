@@ -1,9 +1,11 @@
 package cn.xpbootcamp.gilded_rose;
 
+ import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
  import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SuperLockerRobotTest {
 
@@ -58,6 +60,21 @@ public class SuperLockerRobotTest {
     }
 
 
+    @Test
+    public void should_throw_locker_full_exception_when_store_bag_given_smart_locker_robot_lockers_is_full() {
+        //given
+        Locker firstLocker = getFullLocker();
+        Locker secondLocker = getFullLocker();
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(firstLocker, secondLocker));
+        //when then
+        assertThrows(LockerFullException.class, () -> superLockerRobot.store(new Bag()));
+    }
+
+    private Locker getFullLocker() {
+        Locker locker = new Locker(1);
+        locker.store(new Bag());
+        return locker;
+    }
 
 
 }
