@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class SmartLockerRobotTest {
 
     @Test
-    public void should_return_ticket_and_store_1st_locker_when_store_bag_given_smart_locker_robot_have_two_lockers_and_1st_locker_empty_capacity_is_3_and_2nd_locker_empty_capacity_is_1() {
+    public void should_return_ticket_and_store_1st_locker_when_store_bag_given_smart_locker_robot_have_1st_locker_empty_capacity_is_3_and_2nd_locker_empty_capacity_is_1() {
         //given
         Locker firstLocker = new Locker(3);
         Locker secondLocker = new Locker(1);
@@ -25,7 +25,7 @@ public class SmartLockerRobotTest {
     }
 
     @Test
-    public void should_return_ticket_when_store_bag_given_smart_locker_robot_is_not_full_and_have_empty_capacity_is_1_and_empty_capacity_is_3() {
+    public void should_return_ticket_when_store_bag_given_smart_locker_robot_have_empty_capacity_is_1_and_empty_capacity_is_3() {
         //given
         Locker firstLocker = new Locker(1);
         Locker secondLocker = new Locker(3);
@@ -39,7 +39,7 @@ public class SmartLockerRobotTest {
     }
 
     @Test
-    public void should_return_ticket_when_store_bag_given_smart_locker_robot_is_not_full_and_have_empty_capacity_is_2_and_empty_capacity_is_2() {
+    public void should_return_ticket_when_store_bag_given_smart_locker_robot_have_empty_capacity_is_2_and_empty_capacity_is_2() {
         //given
         Locker firstLocker = new Locker(2);
         Locker secondLocker = new Locker(2);
@@ -88,8 +88,8 @@ public class SmartLockerRobotTest {
     public void should_return_bag_when_take_bag_given_smart_locker_robot_is_not_empty_and_1st_locker_right_ticket() {
         //given
         Bag bag = new Bag();
-        Locker firstLocker = new Locker(20);
-        Locker secondLocker = new Locker(20);
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(firstLocker, secondLocker));
 
         Ticket ticket = firstLocker.store(bag);
@@ -102,8 +102,8 @@ public class SmartLockerRobotTest {
     @Test
     public void should_throw_ticket_error_exception_when_take_bag_given_ticket_is_wrong() {
         //given
-        Locker firstLocker = new Locker(20);
-        Locker secondLocker = new Locker(20);
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(firstLocker, secondLocker));
         Ticket ticket = new Ticket();
         //then
