@@ -18,8 +18,7 @@ public class SmartLockerRobot implements Robot {
     public Ticket store(Bag bag) {
         Locker needStoreLocker = lockers.stream()
                 .filter(locker -> !locker.isFull())
-                .sorted(Comparator.comparing(Locker::getEmptyCapacity).reversed())
-                .findFirst()
+                .max(Comparator.comparing(Locker::getEmptyCapacity))
                 .orElseThrow(LockerFullException::new);
         Ticket ticket = needStoreLocker.store(bag);
         return ticket;
