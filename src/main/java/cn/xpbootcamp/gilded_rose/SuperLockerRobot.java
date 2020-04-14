@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
 import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
+import cn.xpbootcamp.gilded_rose.exception.TicketErrorException;
 
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +29,10 @@ public class SuperLockerRobot implements Robot {
 
     @Override
     public Bag take(Ticket ticket) {
-        return null;
+        return lockers.stream()
+                .filter(locker -> locker.isValidTicket(ticket))
+                .map(locker -> locker.take(ticket))
+                .findFirst()
+                .orElseThrow(TicketErrorException::new);
     }
 }

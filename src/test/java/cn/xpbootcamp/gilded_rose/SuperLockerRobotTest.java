@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
  import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
+ import cn.xpbootcamp.gilded_rose.exception.TicketErrorException;
  import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 
@@ -76,5 +77,46 @@ public class SuperLockerRobotTest {
         return locker;
     }
 
+
+    @Test
+    public void should_return_bag_when_take_bag_given_super_locker_robot_is_not_empty_and_2nd_locker_right_ticket() {
+        //given
+        Bag bag = new Bag();
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(firstLocker, secondLocker));
+
+        Ticket ticket = secondLocker.store(bag);
+        //when
+        Bag unlockedBag = superLockerRobot.take(ticket);
+        //then
+        assertThat(unlockedBag).isEqualTo(bag);
+    }
+
+    @Test
+    public void should_return_bag_when_take_bag_given_super_locker_robot_is_not_empty_and_1st_locker_right_ticket() {
+        //given
+        Bag bag = new Bag();
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(firstLocker, secondLocker));
+
+        Ticket ticket = firstLocker.store(bag);
+        //when
+        Bag unlockedBag = superLockerRobot.take(ticket);
+        //then
+        assertThat(unlockedBag).isEqualTo(bag);
+    }
+
+    @Test
+    public void should_throw_ticket_error_exception_when_take_bag_given_ticket_is_wrong() {
+        //given
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(firstLocker, secondLocker));
+        Ticket ticket = new Ticket();
+        //then
+        assertThrows(TicketErrorException.class, () -> superLockerRobot.take(ticket));
+    }
 
 }
