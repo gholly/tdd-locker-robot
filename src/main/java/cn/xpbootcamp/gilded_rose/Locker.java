@@ -18,6 +18,10 @@ public class Locker {
         return totalCapacity - ticketBagMap.size();
     }
 
+    public Double getEmptyRate() {
+        return Double.valueOf(getEmptyCapacity() / totalCapacity);
+    }
+
     public boolean isFull() {
         return getEmptyCapacity() == 0;
     }
